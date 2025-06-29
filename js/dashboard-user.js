@@ -1,4 +1,4 @@
-// Use the client from supabase.js
+// Use the global Supabase client (set in supabase.js)
 const supabase = window.supabase;
 
 // Build a public image URL from a storage path
@@ -6,19 +6,16 @@ function getPublicImageUrl(path) {
   return `https://ngqsmsdxulgpiywlczcx.supabase.co/storage/v1/object/public/${path}`;
 }
 
-// Load the user's info from Supabase
+// Load the user's info and render dashboard
 async function loadUserProfile() {
-  const { data: authData, error: authError } = await supabase.auth.getUser();
+  const user = supabase.auth.user();
 
-  if (authError || !authData?.user) {
-    console.error('User not authenticated:', authError);
-    document.getElementById('welcome-message').textContent = 'Unable to load user.';
+  if (!user) {
+    console.error('No user session found.');
+    document.getElementById('welcome-message').textContent = 'Please log in.';
     return;
   }
 
-  const user = authData.user;
-
-  // Fetch store info based on user ID
   const { data: profile, error: profileError } = await supabase
     .from('stores')
     .select('store_number, role, display_name')
@@ -30,16 +27,16 @@ async function loadUserProfile() {
     return;
   }
 
-  // Inject user and store info into the DOM
+  // Inject profile info into DOM
   document.getElementById('user-name').textContent = profile.display_name || 'Team Member';
   document.getElementById('store-number').textContent = profile.store_number || '—';
   document.getElementById('user-role').textContent = profile.role || '—';
 
-  // Now load store photos
+  // Load photos for the user's store
   loadStorePhotos(profile.store_number);
 }
 
-// Load photos for a given store number
+// Load visible photos for a store
 async function loadStorePhotos(storeNumber) {
   const { data: photos, error } = await supabase
     .from('store_photos')
@@ -56,7 +53,7 @@ async function loadStorePhotos(storeNumber) {
   renderGallery(photos);
 }
 
-// Render gallery cards into the DOM
+// Render photo cards into the gallery section
 function renderGallery(photos) {
   const gallery = document.getElementById('store-gallery');
   if (!gallery) return;
@@ -79,7 +76,7 @@ function renderGallery(photos) {
   });
 }
 
-// Handle mobile sidebar toggle
+// Mobile sidebar toggle behavior
 function setupSidebar() {
   const menuToggle = document.getElementById('menu-toggle');
   const closeSidebar = document.getElementById('close-sidebar');
@@ -89,7 +86,7 @@ function setupSidebar() {
   closeSidebar?.addEventListener('click', () => sidebar?.classList.remove('show'));
 }
 
-// Initialize dashboard on load
+// Initialize dashboard logic
 document.addEventListener('DOMContentLoaded', () => {
   setupSidebar();
   loadUserProfile();
