@@ -4,24 +4,32 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Our Locations | Papa Johns Jax</title>
-  <link rel="stylesheet" href="css/navbar.css"/>
-  <link rel="stylesheet" href="css/locations.css"/>
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/locations.css" />
+
+  <!-- Supabase CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.4/dist/umd/supabase.min.js"></script>
+
+  <!-- Scripts -->
   <script src="js/navbar.js" defer></script>
   <script src="js/locations.js" defer></script>
 </head>
 <body>
+  <!-- NAVBAR -->
   <div id="navbar-container"></div>
 
+  <!-- HEADER SECTION -->
   <section class="locations-header">
     <h1>Our Stores</h1>
-    <p>Find your nearest Papa Johns Jax location below.</p>
+    <p>Find a Papa Johns Jax location near you.</p>
   </section>
 
-  <section class="locations-container" id="locations-list">
-    <!-- Store cards will be injected here -->
-  </section>
+  <!-- STORES TABLE -->
+  <section id="locations-list"></section>
 
+  <!-- FOOTER -->
   <footer class="footer">
     <p>&copy; 2025 Papa Johns Jacksonville</p>
   </footer>
