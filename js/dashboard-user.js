@@ -1,4 +1,5 @@
-// Use the global Supabase client (set in supabase.js)
+// dashboard-user.js
+
 const supabase = window.supabaseClient;
 
 // Build a public image URL from a storage path
@@ -6,16 +7,19 @@ function getPublicImageUrl(path) {
   return `https://ngqsmsdxulgpiywlczcx.supabase.co/storage/v1/object/public/${path}`;
 }
 
-// Load the user's info and render dashboard
+// Fetch profile and render dashboard
 async function loadUserProfile() {
-  const user = supabase.auth.user();
+  const { data, error } = await supabase.auth.getUser();
 
-  if (!user) {
-    console.error('No user session found.');
+  if (error || !data?.user) {
+    console.error('No user session found:', error);
     document.getElementById('welcome-message').textContent = 'Please log in.';
     return;
   }
 
+  const user = data.user;
+
+  // Get store profile
   const { data: profile, error: profileError } = await supabase
     .from('stores')
     .select('store_number, role, display_name')
@@ -27,16 +31,15 @@ async function loadUserProfile() {
     return;
   }
 
-  // Inject profile info into DOM
+  // Populate DOM with user/store info
   document.getElementById('user-name').textContent = profile.display_name || 'Team Member';
   document.getElementById('store-number').textContent = profile.store_number || '—';
   document.getElementById('user-role').textContent = profile.role || '—';
 
-  // Load photos for the user's store
   loadStorePhotos(profile.store_number);
 }
 
-// Load visible photos for a store
+// Fetch photos and pass them to renderer
 async function loadStorePhotos(storeNumber) {
   const { data: photos, error } = await supabase
     .from('store_photos')
@@ -53,7 +56,7 @@ async function loadStorePhotos(storeNumber) {
   renderGallery(photos);
 }
 
-// Render photo cards into the gallery section
+// Render gallery items
 function renderGallery(photos) {
   const gallery = document.getElementById('store-gallery');
   if (!gallery) return;
@@ -76,17 +79,17 @@ function renderGallery(photos) {
   });
 }
 
-// Mobile sidebar toggle behavior
+// Toggle sidebar for mobile
 function setupSidebar() {
-  const menuToggle = document.getElementById('menu-toggle');
-  const closeSidebar = document.getElementById('close-sidebar');
+  const toggle = document.getElementById('menu-toggle');
+  const close = document.getElementById('close-sidebar');
   const sidebar = document.getElementById('sidebar');
 
-  menuToggle?.addEventListener('click', () => sidebar?.classList.add('show'));
-  closeSidebar?.addEventListener('click', () => sidebar?.classList.remove('show'));
+  toggle?.addEventListener('click', () => sidebar?.classList.add('show'));
+  close?.addEventListener('click', () => sidebar?.classList.remove('show'));
 }
 
-// Initialize dashboard logic
+// Initialize everything on DOM load
 document.addEventListener('DOMContentLoaded', () => {
   setupSidebar();
   loadUserProfile();
