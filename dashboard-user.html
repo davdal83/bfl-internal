@@ -1,7 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang="en">Add commentMore actions
 <head>
   <meta charset="UTF-8" />
+  <title>User Dashboard | Papa Johns Jax</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Store Gallery</title>
   <style>
@@ -12,12 +12,18 @@
       background-color: #f9f9f9;
     }
 
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/dashboard.css" />
     h1 {
       text-align: center;
       color: #333;
       margin-bottom: 2rem;
     }
 
+  <!-- Supabase & Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.4/dist/umd/supabase.min.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/dashboard-user.js" defer></script>
     .photo-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -58,6 +64,41 @@
   </style>
 </head>
 <body>
+  <div class="dashboard-container">
+
+    <!-- Mobile Hamburger Icon -->
+    <button id="menu-toggle" class="hamburger" aria-label="Open sidebar">☰</button>
+
+    <!-- Sidebar -->
+    <aside class="sidebar hidden-mobile" id="sidebar">
+      <div class="sidebar-header">
+        <h2>Papa Johns Jax</h2>
+        <button id="close-sidebar" class="close-sidebar" aria-label="Close sidebar">×</button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#" class="active">My Store</a>
+        <a href="#">Other Stores</a>
+        <a href="#">Files & Documents</a>
+        <a href="#">Upcoming Events</a>
+        <a href="#">My Profile</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button id="logout-button">Log Out</button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <section class="welcome-section">
+        <h1 id="welcome-message">Welcome back. Let’s get to work.</h1>
+      </section>
+
+      <section class="dashboard-section">
+        <p>Select an item from the sidebar to get started.</p>
+      </section>
+    </main>
 
   <h1>My Store Photo Gallery</h1>
   <div id="store-gallery" class="photo-grid">
@@ -66,4 +107,4 @@
 
   <script src="dashboard-user.js"></script>
 </body>
-</html>
+</html>Add comment
