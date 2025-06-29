@@ -15,11 +15,17 @@
 </head>
 <body>
   <div class="dashboard-container">
+
+    <!-- Mobile Hamburger Icon -->
+    <button id="menu-toggle" class="hamburger" aria-label="Open sidebar">☰</button>
+
     <!-- Sidebar -->
-    <aside class="sidebar">
+    <aside class="sidebar hidden-mobile" id="sidebar">
       <div class="sidebar-header">
         <h2>Papa Johns Jax</h2>
+        <button id="close-sidebar" class="close-sidebar" aria-label="Close sidebar">×</button>
       </div>
+
       <nav class="sidebar-nav">
         <a href="#" class="active">My Store</a>
         <a href="#">Other Stores</a>
@@ -27,6 +33,7 @@
         <a href="#">Upcoming Events</a>
         <a href="#">My Profile</a>
       </nav>
+
       <div class="sidebar-footer">
         <button id="logout-button">Log Out</button>
       </div>
@@ -38,11 +45,11 @@
         <h1 id="welcome-message">Welcome back. Let’s get to work.</h1>
       </section>
 
-      <!-- Future dynamic content goes here -->
       <section class="dashboard-section">
         <p>Select an item from the sidebar to get started.</p>
       </section>
     </main>
+
   </div>
 </body>
 </html>
