@@ -22,7 +22,7 @@ async function loadUserProfile() {
   // Pull store_number and full_name from users table
   const { data: profile, error: profileError } = await supabase
     .from('users') // 🔁 Change this table name if needed
-    .select('store_number, full_name')
+    .select('store_number, first_name')
     .eq('id', user.id)
     .single();
 
@@ -32,7 +32,7 @@ async function loadUserProfile() {
   }
 
   const storeNumber = profile.store_number;
-  const firstName = profile.full_name?.split(' ')[0] || 'Team Member';
+  const firstName = profile.first_name?.split(' ')[0] || 'Team Member';
 
   // Update DOM with name and store number
   document.getElementById('welcome-message').textContent = `Welcome back, ${firstName}. Let’s get to work.`;
