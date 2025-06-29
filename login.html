@@ -51,15 +51,15 @@
   <div id="request-modal" class="modal-overlay hidden">
     <div class="modal-content">
       <h3>Request Access</h3>
-      <form id="request-form">
-        <input type="text" id="first_name" placeholder="First Name" required />
-        <input type="text" id="last_name" placeholder="Last Name" required />
-        <input type="email" id="email-request" placeholder="Email" autocomplete="username" required />
-        <input type="tel" id="phone" placeholder="Phone" required />
-        <input type="text" id="store_number" placeholder="Store Number" required />
-        <input type="password" id="password-request" placeholder="Create Password" autocomplete="new-password" required />
-        <button type="submit">Submit Request</button>
-      </form>
+        <form id="request-form">
+          <input type="text" id="first_name" placeholder="First Name" autocomplete="given-name" required />
+          <input type="text" id="last_name" placeholder="Last Name" autocomplete="family-name" required />
+          <input type="email" id="email-request" placeholder="Email" autocomplete="username" required />
+          <input type="tel" id="phone" placeholder="Phone" autocomplete="tel" required />
+          <input type="text" id="store_number" placeholder="Store Number" autocomplete="off" required />
+          <input type="password" id="password-request" placeholder="Create Password" autocomplete="new-password" required />
+          <button type="submit">Submit Request</button>
+        </form>
       <div id="request-message" class="login-feedback" style="margin-top: 12px;"></div>
       <div class="login-home" style="margin-top: 16px;">
         <a href="#" id="close-request">← Return to Home</a>
