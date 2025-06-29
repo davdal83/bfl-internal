@@ -105,40 +105,63 @@ img {
   gap: 40px;
   justify-content: center;
   padding: 80px 20px;
-  background-color: #ffffff;
+  background-color: #F3EEE9;
 }
 
 .highlight {
-  background: #ffffff;
-  border-left: 5px solid #E3C2ED;
-  padding: 20px;
+  background: #FFF8F3;
+  border-left: 6px solid #2D5C2A;
+  padding: 24px;
   border-radius: 12px;
   max-width: 320px;
-  text-align: center;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-  transition: transform 0.3s ease;
+  text-align: left;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.highlight::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 100px;
+  height: 100px;
+  background: #CFEB0C;
+  opacity: 0.05;
+  border-radius: 50%;
+  z-index: 0;
 }
 
 .highlight:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 10px #E3C2ED88;
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.1);
 }
 
 .highlight img {
   border-radius: 8px;
   margin-bottom: 15px;
+  z-index: 1;
+  position: relative;
 }
 
 .highlight h3 {
-  color: #710500;
-  font-size: 1.5rem;
+  color: #2D5C2A;
+  font-size: 1.4rem;
   margin-bottom: 10px;
+  z-index: 1;
+  position: relative;
 }
 
 .highlight p {
   font-size: 1rem;
   line-height: 1.5;
+  color: #333;
+  z-index: 1;
+  position: relative;
 }
+
 
 /* ===== MISSION SECTION ===== */
 .mission {
