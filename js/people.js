@@ -37,9 +37,9 @@ async function loadPeople() {
     return;
   }
 
-  const director = data.filter(p => p.title.toLowerCase().includes("director of operations"));
-  const supervisors = data.filter(p => p.title.toLowerCase().includes("supervisor"));
-  const marketing = data.filter(p => p.title.toLowerCase().includes("marketing"));
+  const director = data.filter(p => p.title.toLowerCase().includes("director of Operations"));
+  const supervisors = data.filter(p => p.title.toLowerCase().includes("Area supervisor"));
+  const marketing = data.filter(p => p.title.toLowerCase().includes("Director of Marketing "));
 
   container.innerHTML =
     formatGroup("Director of Operations", director) +
