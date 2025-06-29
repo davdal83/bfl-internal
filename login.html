@@ -1,30 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Internal Access Portal | Papa Johns Jax</title>
   <meta charset="UTF-8" />
+  <title>Internal Access Portal | Papa Johns Jax</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Supabase JS -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.4/dist/umd/supabase.min.js"></script>
-
-  <!-- Scripts & Styles -->
-  <!-- Load Supabase and shared client first -->
+  <!-- Supabase SDK and shared instance -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.4/dist/umd/supabase.min.js"></script>
   <script src="js/supabase.js"></script>
-  
-  <!-- Page-specific logic -->
+
+  <!-- Modular scripts -->
   <script src="js/modal.js" defer></script>
-  <script src="js/request-access.js" defer></script>
   <script src="js/login.js" defer></script>
-  
+
   <!-- Styles -->
   <link rel="stylesheet" href="css/login.css" />
-
 </head>
 <body>
   <div class="login-wrapper">
-    <!-- LEFT: Hero Side -->
+    <!-- LEFT: Hero Message -->
     <div class="login-left">
       <div class="login-message">
         <h1>Driven. Focused. Fired Up.</h1>
@@ -45,7 +39,6 @@
         <div id="login-message" class="login-feedback"></div>
 
         <div class="login-links">
-          <a href="#" id="open-request">Request Access</a> •
           <a href="#" id="forgot-password-link">Forgot Password?</a>
         </div>
         <div class="login-home">
@@ -55,43 +48,23 @@
     </div>
   </div>
 
-  <!-- 🔓 REQUEST ACCESS MODAL -->
-  <div id="request-modal" class="modal-overlay hidden">
+  <!-- Forgot Password Modal -->
+  <div id="forgot-modal" class="modal-overlay hidden">
     <div class="modal-content">
-      <h3>Request Access</h3>
-        <form id="request-form">
-          <input type="text" id="first_name" placeholder="First Name" autocomplete="given-name" required />
-          <input type="text" id="last_name" placeholder="Last Name" autocomplete="family-name" required />
-          <input type="email" id="email-request" placeholder="Email" autocomplete="username" required />
-          <input type="tel" id="phone" placeholder="Phone" autocomplete="tel" required />
-          <input type="text" id="store_number" placeholder="Store Number" autocomplete="off" required />
-          <input type="password" id="password-request" placeholder="Create Password" autocomplete="new-password" required />
-          <button type="submit">Submit Request</button>
-        </form>
-      <!-- Forgot Password Modal -->
-      <div id="forgot-modal" class="modal-overlay hidden">
-        <div class="modal-content">
-          <h3>Reset Your Password</h3>
-          <form id="forgot-form">
-            <input
-              type="email"
-              id="forgot-email"
-              placeholder="Enter your email"
-              autocomplete="email"
-              required
-            />
-            <button type="submit">Send Reset Link</button>
-          </form>
-          <div id="forgot-message" class="login-feedback" style="margin-top: 12px;"></div>
-          <div class="login-home" style="margin-top: 16px;">
-            <a href="#" id="close-forgot">← Return to Home</a>
-          </div>
-        </div>
-      </div>
-
-      <div id="request-message" class="login-feedback" style="margin-top: 12px;"></div>
+      <h3>Reset Your Password</h3>
+      <form id="forgot-form">
+        <input
+          type="email"
+          id="forgot-email"
+          placeholder="Enter your email"
+          autocomplete="email"
+          required
+        />
+        <button type="submit">Send Reset Link</button>
+      </form>
+      <div id="forgot-message" class="login-feedback" style="margin-top: 12px;"></div>
       <div class="login-home" style="margin-top: 16px;">
-        <a href="#" id="close-request">← Return to Home</a>
+        <a href="#" id="close-forgot">← Return to Home</a>
       </div>
     </div>
   </div>
