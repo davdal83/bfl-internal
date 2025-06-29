@@ -60,6 +60,27 @@
           <input type="password" id="password-request" placeholder="Create Password" autocomplete="new-password" required />
           <button type="submit">Submit Request</button>
         </form>
+      <!-- Forgot Password Modal -->
+      <div id="forgot-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+          <h3>Reset Your Password</h3>
+          <form id="forgot-form">
+            <input
+              type="email"
+              id="forgot-email"
+              placeholder="Enter your email"
+              autocomplete="email"
+              required
+            />
+            <button type="submit">Send Reset Link</button>
+          </form>
+          <div id="forgot-message" class="login-feedback" style="margin-top: 12px;"></div>
+          <div class="login-home" style="margin-top: 16px;">
+            <a href="#" id="close-forgot">← Return to Home</a>
+          </div>
+        </div>
+      </div>
+
       <div id="request-message" class="login-feedback" style="margin-top: 12px;"></div>
       <div class="login-home" style="margin-top: 16px;">
         <a href="#" id="close-request">← Return to Home</a>
