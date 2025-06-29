@@ -4,6 +4,15 @@ const supabaseKey =
 
 const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
+function formatPhoneNumber(raw) {
+  if (!raw) return "";
+  const digits = raw.replace(/\D/g, "");
+  if (digits.length === 10) {
+    return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+  }
+  return raw; // fallback
+}
+
 async function loadStores() {
   const { data, error } = await supabase
     .from("stores")
@@ -28,7 +37,7 @@ async function loadStores() {
       <thead>
         <tr>
           <th>Store #</th>
-          <th>Name</th>
+          <th>Location</th>
           <th>Address</th>
           <th>Phone</th>
         </tr>
@@ -37,12 +46,13 @@ async function loadStores() {
         ${data
           .map((store) => {
             const address = `${store.address}, ${store.city}, ${store.state} ${store.zip_code}`;
+            const formattedPhone = formatPhoneNumber(store.phone_number);
             return `
               <tr>
                 <td>${store.store_number}</td>
                 <td>${store.name}</td>
                 <td>${address}</td>
-                <td><a href="tel:${store.phone_number}">${store.phone_number}</a></td>
+                <td><a href="tel:${store.phone_number}">${formattedPhone}</a></td>
               </tr>
             `;
           })
