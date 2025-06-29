@@ -1,5 +1,5 @@
 // Use the global Supabase client (set in supabase.js)
-const supabase = window.supabase;
+const supabase = window.supabaseClient;
 
 // Build a public image URL from a storage path
 function getPublicImageUrl(path) {
