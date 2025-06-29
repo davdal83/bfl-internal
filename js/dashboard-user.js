@@ -2,12 +2,12 @@
 
 const supabase = window.supabaseClient;
 
-// Build a public image URL from a storage path
+// Build public image URL from storage path
 function getPublicImageUrl(path) {
   return `https://ngqsmsdxulgpiywlczcx.supabase.co/storage/v1/object/public/${path}`;
 }
 
-// Fetch profile and render dashboard
+// Fetch user's profile and load their store dashboard
 async function loadUserProfile() {
   const { data, error } = await supabase.auth.getUser();
 
@@ -19,26 +19,29 @@ async function loadUserProfile() {
 
   const user = data.user;
 
-  // Get store profile
+  // Pull store_number and full_name from users table
   const { data: profile, error: profileError } = await supabase
-    .from('stores')
-    .select('store_number, name')
+    .from('users') // 🔁 Change this table name if needed
+    .select('store_number, full_name')
+    .eq('id', user.id)
     .single();
 
   if (profileError || !profile) {
-    console.error('Error fetching store profile:', profileError);
+    console.error('Error fetching user profile:', profileError);
     return;
   }
 
-  // Populate DOM with user/store info
-  document.getElementById('user-name').textContent = profile.display_name || 'Team Member';
-  document.getElementById('store-number').textContent = profile.store_number || '—';
-  document.getElementById('user-role').textContent = profile.role || '—';
+  const storeNumber = profile.store_number;
+  const firstName = profile.full_name?.split(' ')[0] || 'Team Member';
 
-  loadStorePhotos(profile.store_number);
+  // Update DOM with name and store number
+  document.getElementById('welcome-message').textContent = `Welcome back, ${firstName}. Let’s get to work.`;
+  document.getElementById('store-number').textContent = storeNumber || '—';
+
+  loadStorePhotos(storeNumber);
 }
 
-// Fetch photos and pass them to renderer
+// Load photos for a specific store
 async function loadStorePhotos(storeNumber) {
   const { data: photos, error } = await supabase
     .from('store_photos')
@@ -55,7 +58,7 @@ async function loadStorePhotos(storeNumber) {
   renderGallery(photos);
 }
 
-// Render gallery items
+// Render gallery cards from photo list
 function renderGallery(photos) {
   const gallery = document.getElementById('store-gallery');
   if (!gallery) return;
@@ -78,7 +81,7 @@ function renderGallery(photos) {
   });
 }
 
-// Toggle sidebar for mobile
+// Enable sidebar toggle for mobile view
 function setupSidebar() {
   const toggle = document.getElementById('menu-toggle');
   const close = document.getElementById('close-sidebar');
@@ -88,7 +91,7 @@ function setupSidebar() {
   close?.addEventListener('click', () => sidebar?.classList.remove('show'));
 }
 
-// Initialize everything on DOM load
+// Initialize dashboard on page load
 document.addEventListener('DOMContentLoaded', () => {
   setupSidebar();
   loadUserProfile();
