@@ -52,7 +52,7 @@ body, html {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #ffffff;
+  background-color: #F5E8DC; /* ← Beige background */
 }
 
 .login-box {
