@@ -7,7 +7,7 @@ function getPublicImageUrl(path) {
   return `https://ngqsmsdxulgpiywlczcx.supabase.co/storage/v1/object/public/${path}`;
 }
 
-// Fetch user's profile and load their store dashboard
+// Fetch user profile and load store dashboard
 async function loadUserProfile() {
   const { data, error } = await supabase.auth.getUser();
 
@@ -19,11 +19,11 @@ async function loadUserProfile() {
 
   const user = data.user;
 
-  // Pull store_number and full_name from users table
+  // Pull first_name and store_number from your users table
   const { data: profile, error: profileError } = await supabase
-    .from('users') // 🔁 Change this table name if needed
-    .select('store_number, first_name')
-    .eq('id', user.id)
+    .from('users')
+    .select('first_name, store_number')
+    .eq('user_id', user.id)
     .single();
 
   if (profileError || !profile) {
@@ -31,17 +31,16 @@ async function loadUserProfile() {
     return;
   }
 
+  const firstName = profile.first_name || 'Team Member';
   const storeNumber = profile.store_number;
-  const firstName = profile.first_name?.split(' ')[0] || 'Team Member';
 
-  // Update DOM with name and store number
   document.getElementById('welcome-message').textContent = `Welcome back, ${firstName}. Let’s get to work.`;
   document.getElementById('store-number').textContent = storeNumber || '—';
 
   loadStorePhotos(storeNumber);
 }
 
-// Load photos for a specific store
+// Load store photos for the authenticated user's store
 async function loadStorePhotos(storeNumber) {
   const { data: photos, error } = await supabase
     .from('store_photos')
@@ -58,7 +57,7 @@ async function loadStorePhotos(storeNumber) {
   renderGallery(photos);
 }
 
-// Render gallery cards from photo list
+// Render photo gallery cards
 function renderGallery(photos) {
   const gallery = document.getElementById('store-gallery');
   if (!gallery) return;
@@ -81,7 +80,7 @@ function renderGallery(photos) {
   });
 }
 
-// Enable sidebar toggle for mobile view
+// Handle sidebar open/close on mobile
 function setupSidebar() {
   const toggle = document.getElementById('menu-toggle');
   const close = document.getElementById('close-sidebar');
@@ -91,7 +90,7 @@ function setupSidebar() {
   close?.addEventListener('click', () => sidebar?.classList.remove('show'));
 }
 
-// Initialize dashboard on page load
+// Initialize dashboard logic
 document.addEventListener('DOMContentLoaded', () => {
   setupSidebar();
   loadUserProfile();
