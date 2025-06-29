@@ -1,22 +1,27 @@
 const supabaseUrl = "https://ngqsmsdxulgpiywlczcx.supabase.co";
 const supabaseKey =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ncXNtc2R4dWxncGl5d2xjemN4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEwNTgxNjYsImV4cCI6MjA2NjYzNDE2Nn0.8F_tH-xhmW2Cne2Mh3lWZmHjWD8sDSZd8ZMcYV7tWnM";
+
 const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
 function formatGroup(title, members) {
-  if (members.length === 0) return '';
+  if (members.length === 0) return "";
   return `
     <div>
-      <h2 style="text-align:center; color:#2D5C2A;">${title}</h2>
+      <h2>${title}</h2>
       <div class="team-group">
-        ${members.map(member => `
+        ${members
+          .map(
+            (member) => `
           <div class="team-card">
             <img src="${member.photo_url || 'img/default.png'}" alt="${member.name}" />
             <h3>${member.name}</h3>
             <p>${member.title}</p>
             <a href="mailto:${member.email}">${member.email}</a>
           </div>
-        `).join('')}
+        `
+          )
+          .join("")}
       </div>
     </div>
   `;
@@ -37,14 +42,20 @@ async function loadPeople() {
     return;
   }
 
-  const director = data.filter(p => p.title.toLowerCase().includes("director of Operations"));
-  const supervisors = data.filter(p => p.title.toLowerCase().includes("Area supervisor"));
-  const marketing = data.filter(p => p.title.toLowerCase().includes("Director of Marketing "));
+  const directorOps = data.filter(
+    (p) => p.title.trim() === "Director of Operations"
+  );
+  const supervisors = data.filter(
+    (p) => p.title.trim() === "Area Supervisor"
+  );
+  const marketing = data.filter(
+    (p) => p.title.trim() === "Marketing Director"
+  );
 
   container.innerHTML =
-    formatGroup("Director of Operations", director) +
-    formatGroup("Supervisors", supervisors) +
-    formatGroup("Marketing", marketing);
+    formatGroup("Director of Operations", directorOps) +
+    formatGroup("Area Supervisors", supervisors) +
+    formatGroup("Marketing Director", marketing);
 }
 
 document.addEventListener("DOMContentLoaded", loadPeople);
