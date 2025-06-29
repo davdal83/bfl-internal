@@ -1,7 +1,7 @@
 const supabaseUrl = "https://ngqsmsdxulgpiywlczcx.supabase.co";
 const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ncXNtc2R4dWxncGl5d2xjemN4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEwNTgxNjYsImV4cCI6MjA2NjYzNDE2Nn0.8F_tH-xhmW2Cne2Mh3lWZmHjWD8sDSZd8ZMcYV7tWnM";
 
-const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
 async function loadStores() {
   const { data, error } = await supabase
