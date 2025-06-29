@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>User Dashboard | Papa Johns Jax</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/dashboard.css" />
+
+  <!-- Supabase & Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.4/dist/umd/supabase.min.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/dashboard-user.js" defer></script>
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2>Papa Johns Jax</h2>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#" class="active">My Store</a>
+        <a href="#">Other Stores</a>
+        <a href="#">Files & Documents</a>
+        <a href="#">Upcoming Events</a>
+        <a href="#">My Profile</a>
+      </nav>
+      <div class="sidebar-footer">
+        <button id="logout-button">Log Out</button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <section class="welcome-section">
+        <h1 id="welcome-message">Welcome back. Let’s get to work.</h1>
+      </section>
+
+      <!-- Future dynamic content goes here -->
+      <section class="dashboard-section">
+        <p>Select an item from the sidebar to get started.</p>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
