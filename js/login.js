@@ -1,51 +1,28 @@
-const supabaseUrl = "https://ngqsmsdxulgpiywlczcx.supabase.co";
-const supabaseKey =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ncXNtc2R4dWxncGl5d2xjemN4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEwNTgxNjYsImV4cCI6MjA2NjYzNDE2Nn0.8F_tH-xhmW2Cne2Mh3lWZmHjWD8sDSZd8ZMcYV7tWnM";
-
-const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
-
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("login-form");
+  const message = document.getElementById("login-message");
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value;
 
-    const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
 
-    if (authError) {
-      alert("Login failed. Check your email and password.");
-      console.error("Auth Error:", authError.message);
-      return;
-    }
+      if (error) throw error;
 
-    const userEmail = authData.user.email;
+      // Add redirect logic based on role, etc.
+      message.textContent = "✅ Login successful!";
+      message.style.color = "#2D5C2A";
 
-    const { data: userData, error: userError } = await supabase
-      .from("users")
-      .select("role")
-      .eq("email", userEmail)
-      .single();
-
-    if (userError || !userData) {
-      alert("Account not found in user directory.");
-      console.error("User lookup error:", userError);
-      return;
-    }
-
-    const role = userData.role;
-
-    if (role === "admin") {
-      window.location.href = "dashboard-admin.html";
-    } else if (role === "user") {
-      window.location.href = "dashboard-user.html";
-    } else {
-      alert("Unauthorized: Role not recognized.");
+    } catch (err) {
+      console.error("Login Error:", err.message || err);
+      message.textContent = "❌ Login failed. Check your credentials.";
+      message.style.color = "#c0392b";
     }
   });
 });
