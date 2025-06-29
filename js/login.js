@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (error) throw error;
 
       // Add redirect logic based on role, etc.
-      message.textContent = "✅ Login successful!";
+      message.textContent = "Login successful! Redirecting...";
       message.style.color = "#2D5C2A";
 
     } catch (err) {
