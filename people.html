@@ -1,8 +1,39 @@
-<section class="team-header">
-  <h1>Our People</h1>
-  <p>Meet the leadership team driving Papa Johns Jax forward.</p>
-</section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our People | Papa Johns Jax</title>
 
-<section id="team-cards" class="team-container">
-  <!-- Dynamic team cards will be injected here -->
-</section>
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/people.css" />
+
+  <!-- Supabase CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.4/dist/umd/supabase.min.js"></script>
+
+  <!-- Scripts -->
+  <script src="js/navbar.js" defer></script>
+  <script src="js/people.js" defer></script>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <div id="navbar-container"></div>
+
+  <!-- HEADER -->
+  <section class="team-header">
+    <h1>Our People</h1>
+    <p>Meet the leadership team driving Papa Johns Jax forward.</p>
+  </section>
+
+  <!-- TEAM CARDS -->
+  <section id="team-cards" class="team-container">
+    <!-- JS dynamically injects groups here -->
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>&copy; 2025 Papa Johns Jacksonville</p>
+  </footer>
+</body>
+</html>
