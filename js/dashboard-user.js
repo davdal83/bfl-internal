@@ -1,52 +1,76 @@
-document.addEventListener("DOMContentLoaded", async () => {
-  // --- SESSION CHECK ---
-  const { data: { session } } = await supabase.auth.getSession();
-  if (!session) {
-    window.location.href = "login.html";
+// 1. Set up your Supabase client
+const supabase = createClient(
+  'https://ngqsmsdxulgpiywlczcx.supabase.co',
+  'YOUR_PUBLIC_ANON_KEY' // 🔐 Replace with your actual anon key
+);
+
+// 2. Helper function to build public image URL
+const getPublicImageUrl = (path) =>
+  `https://ngqsmsdxulgpiywlczcx.supabase.co/storage/v1/object/public/${path}`;
+
+// 3. Fetch the current user's store number (you may already have this)
+async function getUserStoreNumber() {
+  const {
+    data: { user },
+    error
+  } = await supabase.auth.getUser();
+
+  if (error || !user) {
+    console.error('Failed to get user:', error?.message);
+    return null;
+  }
+
+  const { data: profile } = await supabase
+    .from('stores')
+    .select('store_number')
+    .eq('user_id', user.id)
+    .single();
+
+  return profile?.store_number || null;
+}
+
+// 4. Fetch photos for that store
+async function loadStorePhotos() {
+  const storeNumber = await getUserStoreNumber();
+  if (!storeNumber) return;
+
+  const { data: photos, error } = await supabase
+    .from('store_photos')
+    .select('image_path, comment, uploaded_at')
+    .eq('store_number', storeNumber)
+    .eq('visible', true)
+    .order('uploaded_at', { ascending: false });
+
+  if (error) {
+    console.error('Error loading photos:', error.message);
     return;
   }
 
-  const { user } = session;
+  renderGallery(photos);
+}
 
-  // --- FETCH FIRST NAME FOR GREETING ---
-  const { data: profile, error } = await supabase
-    .from("users")
-    .select("first_name")
-    .eq("user_id", user.id)
-    .single();
+// 5. Render gallery to DOM
+function renderGallery(photos) {
+  const gallery = document.getElementById('store-gallery');
+  if (!gallery) return;
 
-  const welcome = document.getElementById("welcome-message");
+  gallery.innerHTML = ''; // Clear existing
 
-  if (error || !profile?.first_name) {
-    welcome.textContent = "Welcome back. Let’s get to work.";
-  } else {
-    welcome.textContent = `Welcome back, ${profile.first_name}. Let’s get to work.`;
-  }
+  photos.forEach(({ image_path, comment, uploaded_at }) => {
+    const imageUrl = getPublicImageUrl(image_path);
+    const formattedDate = new Date(uploaded_at).toLocaleDateString();
 
-  // --- LOGOUT FUNCTIONALITY ---
-  const logout = document.getElementById("logout-button");
-  logout.addEventListener("click", async () => {
-    await supabase.auth.signOut();
-    window.location.href = "login.html";
+    const card = document.createElement('div');
+    card.classList.add('photo-card');
+    card.innerHTML = `
+      <img src="${imageUrl}" alt="Store Photo" />
+      <p>${comment || 'No comment'}</p>
+      <small>Uploaded on ${formattedDate}</small>
+    `;
+
+    gallery.appendChild(card);
   });
+}
 
-  // --- RESPONSIVE SIDEBAR TOGGLE ---
-  const sidebar = document.getElementById("sidebar");
-  const toggleBtn = document.getElementById("menu-toggle");
-  const closeBtn = document.getElementById("close-sidebar");
-  const navLinks = document.querySelectorAll(".sidebar-nav a");
-
-  toggleBtn.addEventListener("click", () => {
-    sidebar.classList.add("show");
-  });
-
-  closeBtn.addEventListener("click", () => {
-    sidebar.classList.remove("show");
-  });
-
-  navLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      sidebar.classList.remove("show");
-    });
-  });
-});
+// 6. Kick it off
+document.addEventListener('DOMContentLoaded', loadStorePhotos);
