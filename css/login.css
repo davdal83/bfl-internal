@@ -227,6 +227,11 @@ body, html {
   text-decoration: underline;
 }
 
+.login-feedback {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
 /* Fade in animation */
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.95); }
