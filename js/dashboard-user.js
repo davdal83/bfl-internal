@@ -1,7 +1,7 @@
 // 1. Set up your Supabase client
 const supabase = createClient(
   'https://ngqsmsdxulgpiywlczcx.supabase.co',
-  'YOUR_PUBLIC_ANON_KEY' // 🔐 Replace with your actual anon key
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ncXNtc2R4dWxncGl5d2xjemN4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEwNTgxNjYsImV4cCI6MjA2NjYzNDE2Nn0.8F_tH-xhmW2Cne2Mh3lWZmHjWD8sDSZd8ZMcYV7tWnM' // 🔐 Replace with your actual anon key
 );
 
 // 2. Helper function to build public image URL
