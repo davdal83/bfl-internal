@@ -1,4 +1,4 @@
-/* ===== BASIC LAYOUT ===== */
+/* ===== PAGE BASE STYLES ===== */
 body {
   font-family: 'Papa Sans', Arial, sans-serif;
   background-color: #F5E8DC;
@@ -26,53 +26,56 @@ body {
   opacity: 0.9;
 }
 
-/* ===== STORE CARD CONTAINER ===== */
-.locations-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
-  padding: 60px 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* ===== STORE CARD ===== */
-.store-card {
-  background: linear-gradient(145deg, #FFFDF8, #F0E3D0);
-  border-left: 5px solid #2D5C2A;
-  border-radius: 12px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-  padding: 24px;
-  max-width: 360px;
+/* ===== TABLE STYLING ===== */
+.locations-table {
   width: 100%;
-  transition: transform 0.2s ease;
+  max-width: 1100px;
+  margin: 40px auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  overflow: hidden;
 }
 
-.store-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
-}
-
-.store-info h3 {
-  font-size: 1.4rem;
-  color: #2D5C2A;
-  margin-bottom: 10px;
-}
-
-.store-info p {
+.locations-table thead {
+  background-color: #2D5C2A;
+  color: #fff;
   font-size: 1rem;
-  margin: 6px 0;
-  line-height: 1.5;
+  text-align: left;
 }
 
-.store-info a {
+.locations-table th, 
+.locations-table td {
+  padding: 18px 20px;
+  border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
+}
+
+.locations-table th {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.locations-table tr:nth-child(even) {
+  background-color: #FAF6F2;
+}
+
+.locations-table tr:hover {
+  background-color: #EAF7ED;
+  transition: background 0.2s ease;
+}
+
+/* ===== PHONE LINK STYLING ===== */
+.locations-table a {
   color: #65A17A;
-  text-decoration: none;
   font-weight: bold;
+  text-decoration: none;
 }
 
-.store-info a:hover {
+.locations-table a:hover {
   text-decoration: underline;
 }
 
@@ -83,16 +86,18 @@ body {
   text-align: center;
   padding: 24px 20px;
   font-size: 0.9rem;
-  margin-top: 40px;
+  margin-top: 60px;
 }
 
-/* ===== RESPONSIVE ===== */
+/* ===== RESPONSIVE TABLE WRAPPER (OPTIONAL) ===== */
 @media (max-width: 768px) {
   .locations-header h1 {
     font-size: 2rem;
   }
 
-  .store-card {
-    max-width: 100%;
+  .locations-table {
+    font-size: 0.9rem;
+    overflow-x: auto;
+    display: block;
   }
 }
