@@ -1,39 +1,46 @@
-// 1. Set up your Supabase client
-const supabase = createClient(
-  'https://ngqsmsdxulgpiywlczcx.supabase.co',
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ncXNtc2R4dWxncGl5d2xjemN4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEwNTgxNjYsImV4cCI6MjA2NjYzNDE2Nn0.8F_tH-xhmW2Cne2Mh3lWZmHjWD8sDSZd8ZMcYV7tWnM' // 🔐 Replace with your actual anon key
-);
+// Use the client from supabase.js
+const supabase = window.supabase;
 
-// 2. Helper function to build public image URL
-const getPublicImageUrl = (path) =>
-  `https://ngqsmsdxulgpiywlczcx.supabase.co/storage/v1/object/public/${path}`;
+// Build a public image URL from a storage path
+function getPublicImageUrl(path) {
+  return `https://ngqsmsdxulgpiywlczcx.supabase.co/storage/v1/object/public/${path}`;
+}
 
-// 3. Fetch the current user's store number (you may already have this)
-async function getUserStoreNumber() {
-  const {
-    data: { user },
-    error
-  } = await supabase.auth.getUser();
+// Load the user's info from Supabase
+async function loadUserProfile() {
+  const { data: authData, error: authError } = await supabase.auth.getUser();
 
-  if (error || !user) {
-    console.error('Failed to get user:', error?.message);
-    return null;
+  if (authError || !authData?.user) {
+    console.error('User not authenticated:', authError);
+    document.getElementById('welcome-message').textContent = 'Unable to load user.';
+    return;
   }
 
-  const { data: profile } = await supabase
+  const user = authData.user;
+
+  // Fetch store info based on user ID
+  const { data: profile, error: profileError } = await supabase
     .from('stores')
-    .select('store_number')
+    .select('store_number, role, display_name')
     .eq('user_id', user.id)
     .single();
 
-  return profile?.store_number || null;
+  if (profileError || !profile) {
+    console.error('Error fetching store profile:', profileError);
+    return;
+  }
+
+  // Inject user and store info into the DOM
+  document.getElementById('user-name').textContent = profile.display_name || 'Team Member';
+  document.getElementById('store-number').textContent = profile.store_number || '—';
+  document.getElementById('user-role').textContent = profile.role || '—';
+
+  // Now load store photos
+  loadStorePhotos(profile.store_number);
 }
 
-// 4. Fetch photos for that store
-async function loadStorePhotos() {
-  const storeNumber = await getUserStoreNumber();
-  if (!storeNumber) return;
-
+// Load photos for a given store number
+async function loadStorePhotos(storeNumber) {
   const { data: photos, error } = await supabase
     .from('store_photos')
     .select('image_path, comment, uploaded_at')
@@ -49,12 +56,12 @@ async function loadStorePhotos() {
   renderGallery(photos);
 }
 
-// 5. Render gallery to DOM
+// Render gallery cards into the DOM
 function renderGallery(photos) {
   const gallery = document.getElementById('store-gallery');
   if (!gallery) return;
 
-  gallery.innerHTML = ''; // Clear existing
+  gallery.innerHTML = '';
 
   photos.forEach(({ image_path, comment, uploaded_at }) => {
     const imageUrl = getPublicImageUrl(image_path);
@@ -72,5 +79,18 @@ function renderGallery(photos) {
   });
 }
 
-// 6. Kick it off
-document.addEventListener('DOMContentLoaded', loadStorePhotos);
+// Handle mobile sidebar toggle
+function setupSidebar() {
+  const menuToggle = document.getElementById('menu-toggle');
+  const closeSidebar = document.getElementById('close-sidebar');
+  const sidebar = document.getElementById('sidebar');
+
+  menuToggle?.addEventListener('click', () => sidebar?.classList.add('show'));
+  closeSidebar?.addEventListener('click', () => sidebar?.classList.remove('show'));
+}
+
+// Initialize dashboard on load
+document.addEventListener('DOMContentLoaded', () => {
+  setupSidebar();
+  loadUserProfile();
+});
