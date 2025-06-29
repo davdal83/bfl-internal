@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       try {
         const { error } = await supabase.auth.resetPasswordForEmail(email, {
-          redirectTo: "https://yourdomain.com/update-password.html" // ← Update this to match your actual reset page
+          redirectTo: "https://davdal83.github.io/bfl-internal/update-password.html" // ← Update this to match your actual reset page
         });
 
         if (error) throw error;
