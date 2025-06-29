@@ -1,4 +1,4 @@
-/* General Reset & Base Styles */
+/* ===== BASE RESET ===== */
 body, html {
   margin: 0;
   padding: 0;
@@ -6,6 +6,7 @@ body, html {
   background-color: #F5E8DC;
   color: #000000;
   scroll-behavior: smooth;
+  transition: background-color 0.3s ease;
 }
 
 a {
@@ -15,11 +16,10 @@ a {
 
 img {
   max-width: 100%;
-  height: auto;
   display: block;
 }
 
-/* HERO SECTION */
+/* ===== HERO SECTION ===== */
 .hero {
   position: relative;
   height: 100vh;
@@ -30,7 +30,7 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.6);
+  filter: brightness(0.5);
 }
 
 .hero-overlay {
@@ -39,47 +39,191 @@ img {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  padding: 20px;
-  backdrop-filter: blur(8px);
+  padding: 30px;
+  backdrop-filter: blur(10px);
   background-color: rgba(0, 0, 0, 0.4);
-  color: #FFFFFF;
+  color: #fff;
   border-radius: 10px;
   max-width: 90%;
+  animation: fadeIn 1s ease-in-out;
 }
 
 .hero-overlay h1 {
-  font-size: 3.5rem;
+  font-size: 3.8rem;
+  margin-bottom: 15px;
   color: #FFCF6E;
-  margin-bottom: 10px;
+  text-shadow: 2px 2px #2D5C2A;
 }
 
 .hero-overlay p {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
+  font-size: 1.3rem;
+  margin-bottom: 25px;
+  color: #fff;
 }
 
 .cta {
   background-color: #65A17A;
-  color: #FFFFFF;
-  padding: 12px 28px;
+  color: #fff;
+  padding: 14px 30px;
   border-radius: 6px;
   font-weight: bold;
-  transition: background-color 0.3s ease;
+  font-size: 1.1rem;
+  border: none;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 .cta:hover {
   background-color: #2D5C2A;
+  transform: scale(1.05);
 }
 
-/* Scroll Indicator */
+/* ===== SCROLL INDICATOR ===== */
 .scroll-indicator {
   position: absolute;
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   font-size: 2rem;
-  color: #FFFFFF;
+  color: #fff;
   animation: bounce 1.5s infinite;
+}
+
+/* ===== HIGHLIGHTS SECTION ===== */
+.highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: center;
+  padding: 80px 20px;
+  background-color: #ffffff;
+}
+
+.highlight {
+  background: #E3C2ED;
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 320px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.highlight:hover {
+  transform: translateY(-5px);
+}
+
+.highlight img {
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.highlight h3 {
+  color: #710500;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.highlight p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* ===== MISSION SECTION ===== */
+.mission {
+  padding: 80px 20px;
+  background-color: #2D5C2A;
+  color: #fff;
+  text-align: center;
+}
+
+.mission h2 {
+  font-size: 2.4rem;
+  color: #FFCF6E;
+  margin-bottom: 20px;
+}
+
+.mission p {
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+/* ===== TEAM PREVIEW SECTION ===== */
+.team-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: center;
+  padding: 80px 20px;
+  background-color: #FFF;
+  justify-content: center;
+}
+
+.team-content {
+  flex: 1;
+  min-width: 280px;
+  max-width: 600px;
+}
+
+.team-content h2 {
+  font-size: 2.2rem;
+  color: #2D5C2A;
+  margin-bottom: 15px;
+}
+
+.team-content p {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.cta-light {
+  background-color: transparent;
+  border: 2px solid #65A17A;
+  color: #2D5C2A;
+  padding: 10px 22px;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.cta-light:hover {
+  background-color: #65A17A;
+  color: #fff;
+}
+
+.team-preview img {
+  flex: 1;
+  max-width: 500px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background-color: #2D5C2A;
+  color: #fff;
+  text-align: center;
+  padding: 30px 20px;
+  font-size: 0.95rem;
+}
+
+.footer a {
+  color: #FFCF6E;
+  font-weight: bold;
+  margin: 0 5px;
+  transition: color 0.2s ease;
+}
+
+.footer a:hover {
+  color: #FFFFFF;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translate(-50%, -60%); }
+  to { opacity: 1; transform: translate(-50%, -50%); }
 }
 
 @keyframes bounce {
@@ -87,70 +231,7 @@ img {
   50% { transform: translate(-50%, -10px); }
 }
 
-/* ABOUT SECTION */
-.about {
-  padding: 80px 20px;
-  background-color: #FFFFFF;
-}
-
-.about-wrapper {
-  display: flex;
-  gap: 40px;
-  max-width: 1200px;
-  margin: 0 auto;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.about-text {
-  flex: 1;
-  min-width: 280px;
-}
-
-.about-text h2 {
-  color: #2D5C2A;
-  font-size: 2.2rem;
-  margin-bottom: 15px;
-}
-
-.about-text p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  margin-bottom: 20px;
-}
-
-.link-more {
-  color: #2D5C2A;
-  font-weight: bold;
-  border-bottom: 2px solid #2D5C2A;
-  transition: color 0.2s ease;
-}
-
-.link-more:hover {
-  color: #65A17A;
-  border-color: #65A17A;
-}
-
-.about-img {
-  flex: 1;
-  min-width: 280px;
-}
-
-.about-img img {
-  border-radius: 8px;
-  box-shadow: 0 0 12px rgba(0,0,0,0.2);
-}
-
-/* FOOTER */
-.footer {
-  background-color: #2D5C2A;
-  color: #FFFFFF;
-  text-align: center;
-  padding: 20px;
-  font-size: 0.95rem;
-}
-
-/* RESPONSIVE TWEAKS */
+/* ===== MOBILE RESPONSIVE ===== */
 @media (max-width: 768px) {
   .hero-overlay h1 {
     font-size: 2.2rem;
@@ -161,16 +242,16 @@ img {
   }
 
   .cta {
-    font-size: 1rem;
     padding: 10px 20px;
+    font-size: 1rem;
   }
 
-  .about-wrapper {
+  .team-preview {
     flex-direction: column;
-    text-align: center;
   }
 
-  .about-img {
-    margin-top: 30px;
+  .highlights {
+    flex-direction: column;
+    align-items: center;
   }
 }
