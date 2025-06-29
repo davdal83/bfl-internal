@@ -1,15 +1,32 @@
+/* ===== GLOBAL BODY STYLES ===== */
+body {
+  font-family: 'Papa Sans', Arial, sans-serif;
+  background-color: #F5E8DC;
+  margin: 0;
+  padding: 0;
+  color: #2D2D2D;
+}
+
+/* ===== HEADER SECTION ===== */
 .team-header {
   text-align: center;
-  background: #2D5C2A;
-  color: white;
-  padding: 60px 20px;
+  background-color: #2D5C2A;
+  color: #FFFFFF;
+  padding: 60px 20px 40px;
 }
 
 .team-header h1 {
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   color: #FFCF6E;
+  margin-bottom: 10px;
 }
 
+.team-header p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+/* ===== CONTAINER ===== */
 .team-container {
   display: flex;
   flex-direction: column;
@@ -19,6 +36,7 @@
   margin: 0 auto;
 }
 
+/* ===== GROUP WRAPPER ===== */
 .team-group {
   display: flex;
   flex-wrap: wrap;
@@ -26,10 +44,11 @@
   justify-content: center;
 }
 
+/* ===== CARD STYLE ===== */
 .team-card {
-  background: #fff;
+  background: #FFFFFF;
   border-radius: 10px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
   padding: 24px;
   width: 280px;
   text-align: center;
@@ -40,6 +59,7 @@
   transform: translateY(-4px);
 }
 
+/* ===== TEAM IMAGE ===== */
 .team-card img {
   width: 100px;
   height: 100px;
@@ -48,17 +68,20 @@
   margin-bottom: 16px;
 }
 
+/* ===== TEAM TEXT ===== */
 .team-card h3 {
   margin: 8px 0 4px;
   color: #2D5C2A;
+  font-size: 1.2rem;
 }
 
 .team-card p {
   margin: 0;
   font-size: 0.95rem;
-  color: #555;
+  color: #555555;
 }
 
+/* ===== EMAIL LINK ===== */
 .team-card a {
   display: inline-block;
   margin-top: 10px;
@@ -66,4 +89,37 @@
   color: #65A17A;
   text-decoration: none;
   font-weight: bold;
+}
+
+.team-card a:hover {
+  text-decoration: underline;
+}
+
+/* ===== SECTION TITLES (e.g. Supervisors) ===== */
+.team-container h2 {
+  text-align: center;
+  font-size: 1.6rem;
+  color: #2D5C2A;
+  margin-bottom: 20px;
+}
+
+/* ===== FOOTER MATCHING STYLE ===== */
+.footer {
+  background-color: #2D5C2A;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 24px 20px;
+  font-size: 0.9rem;
+  margin-top: 60px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .team-header h1 {
+    font-size: 2rem;
+  }
+
+  .team-card {
+    width: 100%;
+  }
 }
