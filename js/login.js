@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const { data: userProfile, error: profileError } = await supabase
         .from("users")
         .select("role")
-        .eq("id", authData.user.id)
+        .eq("user_id", authData.user.id)
         .single();
 
       if (profileError) throw profileError;
