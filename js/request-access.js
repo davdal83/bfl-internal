@@ -1,8 +1,8 @@
-const supabaseUrl = "https://ngqsmsdxulgpiywlczcx.supabase.co";
-const supabaseKey =
+const supabaseUrlRA = "https://ngqsmsdxulgpiywlczcx.supabase.co";
+const supabaseKeyRA =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ncXNtc2R4dWxncGl5d2xjemN4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEwNTgxNjYsImV4cCI6MjA2NjYzNDE2Nn0.8F_tH-xhmW2Cne2Mh3lWZmHjWD8sDSZd8ZMcYV7tWnM";
 
-const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+const supabaseRA = window.supabase.createClient(supabaseUrlRA, supabaseKeyRA);
 
 document.addEventListener("DOMContentLoaded", () => {
   const requestForm = document.getElementById("request-form");
@@ -20,16 +20,16 @@ document.addEventListener("DOMContentLoaded", () => {
       const password = document.getElementById("password-request").value;
 
       try {
-        // 1. Sign up in Supabase Auth
-        const { data: authData, error: authError } = await supabase.auth.signUp({
+        // Create new Auth user
+        const { data: authData, error: authError } = await supabaseRA.auth.signUp({
           email,
           password,
         });
 
         if (authError) throw authError;
 
-        // 2. Add user profile to your custom users table
-        const { error: insertError } = await supabase.from("users").insert({
+        // Insert user details into users table
+        const { error: insertError } = await supabaseRA.from("users").insert({
           email,
           first_name,
           last_name,
@@ -41,12 +41,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (insertError) throw insertError;
 
-        // 3. Show confirmation message
+        // Show confirmation
         messageBox.textContent = "✅ Request submitted! We'll notify you once approved.";
         messageBox.style.color = "#2D5C2A";
         requestForm.reset();
       } catch (err) {
-        console.error("Request Access Error:", err);
+        console.error("Access Request Error:", err);
         messageBox.textContent = "❌ Something went wrong. Please try again or contact support.";
         messageBox.style.color = "#c0392b";
       }
