@@ -1,4 +1,4 @@
-/* ===== LAYOUT ===== */
+/* ===== GLOBAL & LAYOUT ===== */
 body, html {
   margin: 0;
   padding: 0;
@@ -12,26 +12,31 @@ body, html {
   height: 100vh;
 }
 
-/* ===== LEFT SIDE: Hero Image & Message ===== */
+/* ===== LEFT SIDE: Hero Image & Centered Message ===== */
 .login-left {
   flex: 1;
   background-image: url('../img/login-hero.jpg');
   background-size: cover;
   background-position: center;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .login-message {
-  position: absolute;
-  bottom: 60px;
-  left: 60px;
-  color: #ffffff;
-  max-width: 400px;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 40px 30px;
+  border-radius: 12px;
+  color: #fff;
+  text-align: center;
+  max-width: 480px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
 .login-message h1 {
   font-size: 2.5rem;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   color: #FFCF6E;
 }
 
@@ -95,8 +100,9 @@ body, html {
   background-color: #1e3f1c;
 }
 
-/* ===== LINKS & FOOTER ===== */
-.login-links, .login-home {
+/* ===== LINKS ===== */
+.login-links,
+.login-home {
   margin-top: 20px;
   text-align: center;
   font-size: 0.9rem;
@@ -126,8 +132,8 @@ body, html {
   }
 
   .login-message {
-    bottom: 30px;
-    left: 20px;
+    padding: 24px 20px;
+    max-width: 90%;
   }
 
   .login-message h1 {
