@@ -1,0 +1,98 @@
+/* ===== BASIC LAYOUT ===== */
+body {
+  font-family: 'Papa Sans', Arial, sans-serif;
+  background-color: #F5E8DC;
+  margin: 0;
+  padding: 0;
+  color: #2D2D2D;
+}
+
+/* ===== HEADER SECTION ===== */
+.locations-header {
+  text-align: center;
+  padding: 60px 20px 30px;
+  background-color: #2D5C2A;
+  color: #fff;
+}
+
+.locations-header h1 {
+  font-size: 2.8rem;
+  margin-bottom: 10px;
+  color: #FFCF6E;
+}
+
+.locations-header p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+/* ===== STORE CARD CONTAINER ===== */
+.locations-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  padding: 60px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ===== STORE CARD ===== */
+.store-card {
+  background: linear-gradient(145deg, #FFFDF8, #F0E3D0);
+  border-left: 5px solid #2D5C2A;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+  max-width: 360px;
+  width: 100%;
+  transition: transform 0.2s ease;
+}
+
+.store-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+}
+
+.store-info h3 {
+  font-size: 1.4rem;
+  color: #2D5C2A;
+  margin-bottom: 10px;
+}
+
+.store-info p {
+  font-size: 1rem;
+  margin: 6px 0;
+  line-height: 1.5;
+}
+
+.store-info a {
+  color: #65A17A;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.store-info a:hover {
+  text-decoration: underline;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background-color: #2D5C2A;
+  color: #fff;
+  text-align: center;
+  padding: 24px 20px;
+  font-size: 0.9rem;
+  margin-top: 40px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .locations-header h1 {
+    font-size: 2rem;
+  }
+
+  .store-card {
+    max-width: 100%;
+  }
+}
