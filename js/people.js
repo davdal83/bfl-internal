@@ -26,7 +26,7 @@ async function loadPeople() {
   const container = document.getElementById("team-cards");
 
   const { data, error } = await supabase
-    .from("leadersip_team")
+    .from("leadership_team")
     .select("*")
     .eq("active", true)
     .order("display_order", { ascending: true });
