@@ -23,7 +23,6 @@ async function loadUserProfile() {
   const { data: profile, error: profileError } = await supabase
     .from('stores')
     .select('store_number, name')
-    .eq('user_id', user.id)
     .single();
 
   if (profileError || !profile) {
