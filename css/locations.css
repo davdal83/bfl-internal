@@ -63,7 +63,7 @@ body {
   background-color: #FAF6F2;
 }
 
-.locations-table tr:hover {
+.locations-table tbody tr:hover {
   background-color: #EAF7ED;
   transition: background 0.2s ease;
 }
