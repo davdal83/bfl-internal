@@ -1,34 +1,62 @@
-// Supabase setup
-const supabase = window.supabase.createClient(
-  "https://ngqsmsdxulgpiywlczcx.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ncXNtc2R4dWxncGl5d2xjemN4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEwNTgxNjYsImV4cCI6MjA2NjYzNDE2Nn0.8F_tH-xhmW2Cne2Mh3lWZmHjWD8sDSZd8ZMcYV7tWnM"
+const { createClient } = supabase;
+
+const supabaseClient = createClient(
+  'https://ngqsmsdxulgpiywlczcx.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ncXNtc2R4dWxncGl5d2xjemN4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEwNTgxNjYsImV4cCI6MjA2NjYzNDE2Nn0.8F_tH-xhmW2Cne2Mh3lWZmHjWD8sDSZd8ZMcYV7tWnM'
 );
 
-document.addEventListener("DOMContentLoaded", () => {
-  const forgotForm = document.getElementById("forgot-form");
-  const forgotMessage = document.getElementById("forgot-message");
+// 🚩 Always show the form during dev:
+const form = document.getElementById('reset-form');
+if (form) form.style.display = 'block';
 
-  if (forgotForm) {
-    forgotForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
+// Listen for password recovery session from Supabase
+supabaseClient.auth.onAuthStateChange(async (event, session) => {
+  console.log('Auth event:', event);
+  if (event === 'PASSWORD_RECOVERY') {
+    if (form) form.style.display = 'block';
 
-      const email = document.getElementById("forgot-email").value.trim();
+    const { data: { user }, error } = await supabaseClient.auth.getUser();
+    if (user) {
+      const hiddenEmail = document.getElementById('hidden-email');
+      if (hiddenEmail) hiddenEmail.value = user.email;
+    } else {
+      console.warn('Could not fetch user for hidden email field', error);
+    }
+  }
+});
 
-      try {
-        const { error } = await supabase.auth.resetPasswordForEmail(email, {
-          redirectTo: "https://davdal83.github.io/bfl-internal/update-password.html" // ← Update this to match your actual reset page
-        });
+// Handle form submission to update password
+document.getElementById('reset-form')?.addEventListener('submit', async (e) => {
+  e.preventDefault();
 
-        if (error) throw error;
+  const password = document.getElementById('new-password')?.value.trim();
+  const status = document.getElementById('status');
 
-        forgotMessage.textContent = "✅ Password reset link sent! Check your inbox.";
-        forgotMessage.style.color = "#2D5C2A";
-        forgotForm.reset();
-      } catch (err) {
-        console.error("Password Reset Error:", err.message || err);
-        forgotMessage.textContent = "❌ Something went wrong. Please try again.";
-        forgotMessage.style.color = "#c0392b";
+  if (!password) {
+    if (status) {
+      status.textContent = 'Please enter a new password.';
+      status.style.color = '#ce0e2d';
+    }
+    return;
+  }
+
+  const { error } = await supabaseClient.auth.updateUser({ password });
+
+  if (error) {
+    console.error('Password update error:', error);
+    if (status) {
+      status.textContent = 'Something went wrong. Please try again.';
+      status.style.color = '#ce0e2d';
+    }
+  } else {
+      if (status) {
+        status.textContent = '✅ Password updated! Redirecting you back to the dashboard...';
+        status.style.color = '#205c30';
       }
-    });
+
+      setTimeout(() => {
+        window.location.href = '/bfl-internal/dashboard-user.html';
+      }, 2500);
+
   }
 });
