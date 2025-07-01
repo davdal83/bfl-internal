@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>User Dashboard | Papa Johns Jax</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/profile.css" />
+
+
+  <!-- Supabase & Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.4/dist/umd/supabase.min.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/dashboard-user.js" defer></script>
+  <script src="js/profile.js" defer></script>
+  <script src="js/launchpad.js" defer></script>
+
+</head>
+<body>
+  <div class="dashboard-container">
+
+    <!-- Mobile Hamburger Icon -->
+    <button id="menu-toggle" class="hamburger" aria-label="Open sidebar">☰</button>
+
+    <!-- Sidebar -->
+    <aside class="sidebar hidden-mobile" id="sidebar">
+      <div class="sidebar-header">
+        <h2>Papa Johns Jax</h2>
+        <button id="close-sidebar" class="close-sidebar" aria-label="Close sidebar">×</button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#" onclick="showSection('my-store')">My Store</a>
+        <a href="#" onclick="showSection('other-stores')">The Jax Network</a>
+        <a href="#" onclick="showSection('documents-section')">Download Hub</a>
+        <a href="#" onclick="showSection('launchpad-section')">Launchpad</a>
+        <a href="#" onclick="showSection('my-profile'); loadUserProfile();">My Profile</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button id="logout-button">Log Out</button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <section class="welcome-section">
+        <h1 id="welcome-message">Welcome back. Let’s get to work.</h1>
+      </section>
+
+      <section class="dashboard-section" id="my-store" style="display: none;">
+        <!-- Store content will be injected here dynamically -->
+      </section>
+
+      <section class="dashboard-section" id="other-stores" style="display: none;">
+        <!-- Store cards will be injected here -->
+      </section>
+
+      <section class="dashboard-section" id="other-store-view" style="display: none;">
+        <!-- Individual store layout injected dynamically -->
+      </section>
+
+      <!-- 📁 Files & Documents Section -->
+      <section class="dashboard-section" id="documents-section" style="display: none;">
+        <div class="documents-header">
+          <h2>Download Hub</h2>
+          <p>Your go-to spot for docs, tools, and team resources—ready when you are.</p>
+        </div>
+
+        <div id="documents-container" class="documents-grid">
+          <!-- File cards will be injected here via JS -->
+        </div>
+      </section>
+
+        <!-- ==========================
+      👤 My Profile Section
+      ========================== -->
+<section id="my-profile" class="dashboard-section" style="display: none;">
+  <div class="profile-header">
+    <h2>My Profile</h2>
+    <p>View and manage your personal information below.</p>
+  </div>
+
+  <div id="profile-card" class="profile-card">
+    <div class="profile-photo">
+      <label for="profile-img-input" class="profile-img-wrapper">
+        <img id="profile-img" src="" alt="Profile Photo" />
+        <div class="profile-img-overlay">Change</div>
+      </label>
+      <input type="file" id="profile-img-input" accept="image/*" style="display: none;" />
+    </div>
+
+    <div class="profile-fields">
+
+      <!-- First Name -->
+      <div class="profile-field">
+        <div class="profile-label">First Name</div>
+        <div id="profile-first-view" class="profile-value">Loading...</div>
+        <input type="text" id="profile-first-input" class="profile-input" style="display: none;" />
+      </div>
+
+      <!-- Last Name -->
+      <div class="profile-field">
+        <div class="profile-label">Last Name</div>
+        <div id="profile-last-view" class="profile-value">Loading...</div>
+        <input type="text" id="profile-last-input" class="profile-input" style="display: none;" />
+      </div>
+
+      <!-- Preferred Name -->
+      <div class="profile-field">
+        <div class="profile-label">Preferred Name</div>
+        <div id="profile-preferred-view" class="profile-value">Loading...</div>
+        <input type="text" id="profile-preferred-input" class="profile-input" style="display: none;" />
+      </div>
+
+      <!-- Phone Number -->
+      <div class="profile-field">
+        <div class="profile-label">Phone Number</div>
+        <div id="profile-phone-view" class="profile-value">Loading...</div>
+        <input type="text" id="profile-phone-input" class="profile-input" style="display: none;" />
+      </div>
+
+      <!-- Email (read-only) -->
+      <div class="profile-field">
+        <div class="profile-label">Email</div>
+        <div id="profile-email" class="profile-value">Loading...</div>
+      </div>
+
+      <!-- Store Number (read-only) -->
+      <div class="profile-field">
+        <div class="profile-label">Store Number</div>
+        <div id="profile-store" class="profile-value">Loading...</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="profile-actions">
+    <button id="edit-profile-btn" class="btn-primary">Edit Profile</button>
+    <button id="change-password-btn" class="btn-secondary">Change Password</button>
+  </div>
+</section>
+
+  <!-- ==========================
+  🚀 Launchpad Section
+  ========================== -->
+  <section id="launchpad-section" class="dashboard-section" style="display: none;">
+    <div class="launchpad-header">
+      <h2>Launchpad</h2>
+      <p>Your mission briefing center—announcements, updates, and spotlight moments.</p>
+    </div>
+
+    <!-- Grid where all post cards will be injected -->
+    <div id="launchpad-posts" class="launchpad-grid">
+      <!-- Cards will be dynamically inserted here via JS -->
+    </div>
+  </section>
+
+
+
+    </main>
+
+  </div>
+
+<!-- ==========================
+🪩 Launchpad Modal
+========================== -->
+<div id="launchpad-modal" class="launchpad-modal">
+  <div class="modal-inner">
+    
+    <!-- Close button (×) -->
+    <button class="modal-close" aria-label="Close Launchpad Post">×</button>
+    
+    <!-- Modal Content Containers -->
+    <h2 id="modal-title"></h2>
+    <p id="modal-date" class="modal-meta"></p>
+    <p id="modal-author" class="modal-meta"></p>
+    
+    <!-- Optional Image -->
+    <img id="modal-image" alt="Launchpad Header" style="display: none;" />
+    
+    <!-- Main Body Text -->
+    <div id="modal-content" class="modal-body"></div>
+  </div>
+</div>
+
+</body>
+</html>
