@@ -1,0 +1,986 @@
+/*************** SECTION: Color Variables ***************/
+:root {
+  --green: #2D5C2A;
+  --red: #822020;
+  --beige: #F5E8DC;
+  --text-dark: #222;
+  --white: #ffffff;
+}
+
+/*************** SECTION: Base ***************/
+* {
+  box-sizing: border-box;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: var(--beige);
+  color: var(--text-dark);
+  visibility: hidden; /* Unhide on auth check */
+}
+
+/*************** SECTION: Layout ***************/
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  padding: 40px 50px;
+  overflow-x: hidden;
+  background-color: var(--beige);
+}
+
+/*************** SECTION: Sidebar ***************/
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 240px;
+  background-color: var(--green);
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px 40px;
+  flex-shrink: 0;
+  z-index: 900;
+}
+
+.sidebar-header {
+  margin-bottom: 24px;
+}
+
+.sidebar-header h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: var(--white);
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-grow: 1;
+}
+
+.sidebar-nav a {
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.05rem;
+  padding: 10px 12px;
+  border-radius: 6px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a.active {
+  background-color: #5f0d0d; /* Darker rich red */
+  transform: translateX(4px);
+}
+
+.sidebar-footer {
+  margin-top: auto;
+}
+
+.sidebar-footer button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background-color: var(--white);
+  color: var(--green);
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.sidebar-footer button:hover {
+  background-color: #eaeaea;
+}
+
+/*************** SECTION: Mobile Sidebar ***************/
+.hamburger {
+  position: fixed;
+  top: 18px;
+  left: 16px;
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  color: var(--green);
+  z-index: 1000;
+  display: none;
+  cursor: pointer;
+}
+
+.close-sidebar {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .sidebar {
+    position: fixed;
+    left: -260px;
+    transition: left 0.3s ease;
+  }
+
+  .sidebar.show {
+    left: 0;
+  }
+
+  .close-sidebar {
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.6rem;
+    cursor: pointer;
+  }
+
+  .main-content {
+    padding: 80px 24px 40px;
+  }
+}
+
+/* ===== PAGE BASE STYLES ===== */
+body {
+  font-family: 'Papa Sans', Arial, sans-serif;
+  background-color: #F5E8DC;
+  margin: 0;
+  padding: 0;
+  color: #2D2D2D;
+}
+
+/* ===== HEADER SECTION ===== */
+.locations-header {
+  text-align: center;
+  padding: 60px 20px 30px;
+  background-color: #2D5C2A;
+  color: #fff;
+}
+
+.locations-header h1 {
+  font-size: 2.8rem;
+  margin-bottom: 10px;
+  color: #FFCF6E;
+}
+
+.locations-header p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+/* ===== TABLE STYLING ===== */
+.locations-table {
+  width: 100%;
+  max-width: 1100px;
+  margin: 40px auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+.locations-table thead {
+  background-color: #2D5C2A;
+  color: #fff;
+  font-size: 1rem;
+  text-align: left;
+}
+
+.locations-table th, 
+.locations-table td {
+  padding: 18px 20px;
+  border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
+}
+
+.locations-table th {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.locations-table tr:nth-child(even) {
+  background-color: #FAF6F2;
+}
+
+.locations-table tbody tr:hover {
+  background-color: #EAF7ED;
+  transition: background 0.2s ease;
+}
+
+/* ===== PHONE LINK STYLING ===== */
+.locations-table a {
+  color: #65A17A;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.locations-table a:hover {
+  text-decoration: underline;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background-color: #2D5C2A;
+  color: #fff;
+  text-align: center;
+  padding: 24px 20px;
+  font-size: 0.9rem;
+  margin-top: 60px;
+}
+
+/* ===== RESPONSIVE TABLE WRAPPER (OPTIONAL) ===== */
+@media (max-width: 768px) {
+  .locations-header h1 {
+    font-size: 2rem;
+  }
+
+  .locations-table {
+    font-size: 0.9rem;
+    overflow-x: auto;
+    display: block;
+  }
+}
+
+/*************** SECTION: Store Detail Card Styling ***************/
+.store-detail-wrapper {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.store-detail-card {
+  background-color: #fff;
+  padding: 24px 28px;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  margin-top: 32px;
+}
+
+.store-detail-card h1 {
+  font-size: 2rem;
+  color: #2D5C2A;
+  margin-bottom: 10px;
+}
+
+.store-detail-card p {
+  font-size: 1rem;
+  margin: 10px 0;
+  line-height: 1.6;
+  color: #2D2D2D;
+}
+
+
+.store-detail-card strong {
+  color: #444;
+}
+
+/*************** SECTION: Store Hero Banner ***************/
+.store-hero-banner {
+  width: 100%;
+  max-height: 300px;
+  overflow: hidden;
+  background-color: #e6e6e6;
+}
+
+.store-hero-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/*************** SECTION: Jax Network Grid & Card Styling ***************/
+.launchpad-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+  padding-bottom: 60px;
+}
+
+.launchpad-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  padding: 20px 24px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.launchpad-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.launchpad-card h3 {
+  font-size: 1.2rem;
+  color: var(--green);
+  margin-bottom: 6px;
+}
+
+.launchpad-card p {
+  font-size: 0.95rem;
+  margin: 4px 0;
+  color: #333;
+}
+
+.launchpad-card strong {
+  color: #444;
+}
+
+/*************** SECTION: Store Photo Gallery (Admin) ***************/
+.store-photo-gallery {
+  max-width: 1000px;
+  margin: 60px auto;
+  padding: 0 24px;
+}
+
+.store-photo-gallery h2 {
+  font-size: 1.5rem;
+  color: var(--green);
+  margin-bottom: 20px;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.photo-item {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  padding: 12px;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.photo-item:hover {
+  transform: translateY(-2px);
+}
+
+.photo-item img {
+  width: 100%;
+  border-radius: 6px;
+  object-fit: cover;
+  max-height: 160px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.photo-item p {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.photo-placeholder {
+  width: 100%;
+  height: 160px;
+  background-color: #f1f1f1;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+  font-size: 0.9rem;
+}
+/*************** SECTION: Back Button Styling ***************/
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #ffffff;
+  color: var(--green);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 10px 16px;
+  border: 2px solid var(--green);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.back-button:hover {
+  background-color: #f6f6f6;
+  transform: translateX(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+/*************** SECTION: Photo Admin Hover Controls ***************/
+.photo-admin-wrapper {
+  position: relative;
+  width: 100%;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.photo-admin-wrapper img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.photo-actions {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.photo-admin-wrapper:hover .photo-actions {
+  opacity: 1;
+}
+
+.photo-actions button {
+  background-color: rgba(255, 255, 255, 0.85);
+  border: none;
+  padding: 6px 8px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.photo-actions button:hover {
+  background-color: #eee;
+}
+
+/*************** SECTION: Manage Stores Styles ***************/
+.store-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.store-controls {
+  display: flex;
+  gap: 12px;
+}
+
+.store-controls input[type="text"] {
+  padding: 8px 12px;
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  min-width: 200px;
+}
+
+.store-controls button {
+  padding: 8px 16px;
+  background-color: var(--green);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.store-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.store-card {
+  background-color: white;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.store-card h3 {
+  margin-bottom: 6px;
+}
+
+.card-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+}
+
+.card-actions button {
+  flex: 1;
+  font-size: 0.9rem;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: #eee;
+  cursor: pointer;
+}
+
+/*************** SECTION: Store Edit Modal ***************/
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: white;
+  padding: 24px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.15);
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+}
+
+.modal-content label {
+  display: block;
+  margin-top: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="tel"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.modal-actions button {
+  padding: 8px 16px;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.modal-actions button[type="submit"] {
+  background-color: var(--green, #28a745);
+  color: white;
+}
+
+.modal-actions button[type="button"] {
+  background-color: #ddd;
+}
+
+/*************** SECTION: Custom File Input ***************/
+.file-input {
+  display: none;
+}
+
+.file-label {
+  display: inline-block;
+  background-color: var(--green, #28a745);
+  color: white;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 6px;
+  margin-bottom: 8px;
+  transition: background 0.2s ease;
+}
+
+.file-label:hover {
+  background-color: #23923c;
+}
+
+.file-name-preview {
+  display: block;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.modal-actions .delete-btn {
+  background-color: #dc3545;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.modal-actions .delete-btn:hover {
+  background-color: #c82333;
+}
+
+.modal-actions .action-right {
+  display: flex;
+  gap: 12px;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.photo-grid img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #666;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: #000;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.photo-grid img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+#photo-gallery-modal .add-photo-controls {
+  display: flex !important;
+  flex-wrap: wrap;
+  justify-content: flex-start !important;
+  align-items: center;
+  text-align: left !important;
+  gap: 25px;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.add-photo-controls {
+  display: flex !important;
+  flex-wrap: wrap;
+  justify-content: flex-start !important;
+  align-items: center;
+  text-align: left !important;
+  gap: 12px;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+/* Hide the native file input */
+.add-photo-controls input[type="file"] {
+  display: none;
+}
+
+/* "Choose File" label and "Upload" button styling */
+.add-photo-controls label,
+.add-photo-controls button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  height: 38px;
+  line-height: 1;
+  background-color: #23923c;
+  color: white;
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.2s ease;
+  margin-top: 0;
+  margin-bottom: 0;
+
+}
+
+
+/* Hover state */
+.add-photo-controls label:hover,
+.add-photo-controls button:hover {
+  background-color: #1d7c33;
+}
+
+.add-photo-controls {
+  text-align: left !important;
+}
+
+
+.photo-card {
+  background: #f9f9f9;
+  padding: 8px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.photo-card img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.comment-input {
+  font-size: 0.85rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 6px;
+  resize: vertical;
+}
+
+.photo-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.save-comment-btn,
+.delete-photo-btn {
+  font-size: 0.85rem;
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.save-comment-btn {
+  background-color: #23923c;
+  color: white;
+}
+
+.delete-photo-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+/*************** PHOTO GALLERY TABLE LAYOUT ***************/
+.photo-table {
+  width: 100%; /* stretch full viewport width */
+  max-width: 100%;
+  margin-left: calc(-1 * var(--page-padding, 24px));
+  margin-right: calc(-1 * var(--page-padding, 24px));
+  padding-left: var(--page-padding, 24px);
+  padding-right: var(--page-padding, 24px);
+  box-sizing: border-box;
+}
+
+.photo-row {
+  display: grid;
+  grid-template-columns: 100px 120px 1fr 120px;
+  align-items: center;
+  gap: 12px;
+  background: #f9f9f9;
+  padding: 10px 14px;
+  border-radius: 6px;
+}
+
+.photo-row.header {
+  background: transparent;
+  font-weight: 600;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 6px;
+}
+
+.photo-row.header > div {
+  font-size: 0.9rem;
+  color: #444;
+}
+
+.photo-row div:last-child {
+  display: flex;
+  gap: 8px;
+}
+
+
+/*************** IMAGE STYLING ***************/
+.thumb {
+  width: 100%;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+/*************** COMMENT FIELD ***************/
+.comment-input {
+  min-width: 100%;
+  min-height: 32px;
+  padding: 6px 8px;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+/*************** ACTION BUTTONS ***************/
+.photo-row button {
+  font-size: 0.85rem;
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  margin-right: 6px;
+}
+
+.photo-row .save-comment-btn {
+  background-color: #23923c;
+  color: white;
+}
+
+.photo-row .save-comment-btn:hover {
+  background-color: #1d7c33;
+}
+
+.photo-row .delete-photo-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.photo-row .delete-photo-btn:hover {
+  background-color: #b02a37;
+}
+
+/* Only widen modal-content if inside .wide-photo-modal */
+.wide-photo-modal .modal-content {
+  max-width: 100%;
+  margin-left: 10rem;
+  margin-right: 5rem;
+  box-sizing: border-box;
+}
+
+/*************** END PHOTO GALLERY TABLE LAYOUT ***************/
+
+
+.add-photo-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.add-photo-controls .spacer {
+  flex-grow: 1;
+}
+
+#bulk-upload-btn {
+  background-color: var(--red);
+  color: white;
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+#bulk-upload-btn:hover {
+  background-color: darkred;
+}
+
+/*************** BULK UPLOAD MODAL STYLES ***************/
+.dropzone {
+  background: #f0f4f8;
+  border: 2px dashed #999;
+  border-radius: 8px;
+  padding: 30px;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 16px;
+  color: #555;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.dropzone.dragover {
+  background: #e3f5e1;
+  border-color: #23923c;
+}
+
+.preview-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.preview-list img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.upload-all-btn {
+  background-color: #23923c;
+  color: white;
+  padding: 10px 20px;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.upload-all-btn:hover {
+  background-color: #1d7c33;
+}
+/*************** END BULK UPLOAD MODAL STYLES ***************/

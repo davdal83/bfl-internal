@@ -1,0 +1,154 @@
+/* ===== PAGE BASE STYLES ===== */
+body {
+  font-family: 'Papa Sans', Arial, sans-serif;
+  background-color: #F5E8DC;
+  margin: 0;
+  padding: 0;
+  color: #2D2D2D;
+}
+
+/* ===== HEADER SECTION ===== */
+.locations-header {
+  text-align: center;
+  padding: 60px 20px 30px;
+  background-color: #2D5C2A;
+  color: #fff;
+}
+
+.locations-header h1 {
+  font-size: 2.8rem;
+  margin-bottom: 10px;
+  color: #FFCF6E;
+}
+
+.locations-header p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+/* ===== TABLE STYLING ===== */
+.locations-table {
+  width: 100%;
+  max-width: 1100px;
+  margin: 40px auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+.locations-table thead {
+  background-color: #2D5C2A;
+  color: #fff;
+  font-size: 1rem;
+  text-align: left;
+}
+
+.locations-table th, 
+.locations-table td {
+  padding: 18px 20px;
+  border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
+}
+
+.locations-table th {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.locations-table tr:nth-child(even) {
+  background-color: #FAF6F2;
+}
+
+.locations-table tbody tr:hover {
+  background-color: #EAF7ED;
+  transition: background 0.2s ease;
+}
+
+/* ===== PHONE LINK STYLING ===== */
+.locations-table a {
+  color: #65A17A;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.locations-table a:hover {
+  text-decoration: underline;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background-color: #2D5C2A;
+  color: #fff;
+  text-align: center;
+  padding: 24px 20px;
+  font-size: 0.9rem;
+  margin-top: 60px;
+}
+
+/* ===== RESPONSIVE TABLE WRAPPER (OPTIONAL) ===== */
+@media (max-width: 768px) {
+  .locations-header h1 {
+    font-size: 2rem;
+  }
+
+  .locations-table {
+    font-size: 0.9rem;
+    overflow-x: auto;
+    display: block;
+  }
+}
+
+/*************** SECTION: Store Hero Banner Layout ***************/
+.store-hero-banner {
+  width: 100%;
+  max-height: 300px; /* 👈 Set a height limit */
+  overflow: hidden;
+  background-color: #e6e6e6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.store-hero-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* Detail block under hero image */
+.store-detail-wrapper {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px 24px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+}
+
+.store-detail-card h1 {
+  font-size: 2.2rem;
+  color: #2D5C2A;
+  margin-bottom: 10px;
+}
+
+.store-detail-card p {
+  font-size: 1rem;
+  margin: 8px 0;
+  line-height: 1.6;
+}
+
+.back-button {
+  margin-bottom: 24px;
+  background: none;
+  border: none;
+  font-weight: bold;
+  color: #2D5C2A;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+

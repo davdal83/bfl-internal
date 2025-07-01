@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | Papa Johns Jax</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/dashboard-admin.css" />
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.4/dist/umd/supabase.min.js"></script>
+
+  <!-- Scripts -->
+  <script src="js/dashboard-admin.js" defer></script>
+</head>
+<body>
+  <!-- Hamburger for mobile -->
+  <button class="hamburger" id="open-sidebar">☰</button>
+
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="admin-sidebar">
+      <button class="close-sidebar" id="close-sidebar">✖</button>
+
+      <div class="sidebar-header">
+        <h2>Admin Panel</h2>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-link active" data-module="Welcome">Dashboard</a>
+        <a href="#" class="nav-link" data-module="Network">The Jax Network</a>
+        <a href="#" class="nav-link" data-module="Stores">Manage Stores</a>
+        <a href="#" class="nav-link" data-module="Users">Manage Users</a>
+        <a href="#" class="nav-link" data-module="Documents">Documents</a>
+        <a href="#" class="nav-link" data-module="Logs">Logs</a>
+        <a href="#" class="nav-link" data-module="Events">Events</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button onclick="handleSignOut()">Sign Out</button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="admin-main">
+      <!-- Dynamic module content loads here -->
+    </main>
+  </div>
+</body>
+</html>
